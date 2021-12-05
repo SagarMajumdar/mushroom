@@ -9,7 +9,28 @@ const Mailer=()=>{
 
     const sendmail = async ()=>{
         try {
-        const result = await axios.post('http://localhost:5000/api/mushroom/sendmail', { mailbody :ctx.selBody, mailsubject: ctx.selSubject });
+           
+            // test for showing image in browser console
+            (function(url) {
+                var image = new Image();
+              
+                image.onload = function() {
+                  var style = [
+                    'padding: ' + image.height*0.48 +  'px ' + image.width*0.48 + 'px;',
+              
+                    'background: url('+ url +');'
+                   ].join(' ');
+              
+                   // notice the space after %c
+                   console.log('%c ', style);
+                };
+              
+                // Actually loads the image
+                image.src = url;
+              })('http://localhost:3000/static/media/mushroom.ef808cfd.png');
+              //
+
+              const result = await axios.post('http://localhost:5000/api/mushroom/sendmail', { mailbody :ctx.selBody, mailsubject: ctx.selSubject });
         }
         catch(err) {
             console.log(err);
